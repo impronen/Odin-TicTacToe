@@ -1,0 +1,19 @@
+Players choose their markers
+
+There is a grid, 6x6
+Each cell in the grid needs to be represented in gameBoard array
+
+Players in turn click the cells on the grid.
+The game firs needs to check if the cell is empty.
+If it is empty, the players marker is added to it. The gameBoard array is updated to contain players identifier
+
+After that, the game checks if victory conditions are met.
+These are: the player has three markers in a row.
+Hard code the possible directions to the cell and iterate through the possible victory conditions after this move
+If victory conditions are not met, check if the board is full => stalemate.
+If neither => change player.
+
+Repeat until victory conditions are met by player or board is full.
+
+
+Further refinement: check if victory is still possible, if not => end game on stalemate.
