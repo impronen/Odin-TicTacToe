@@ -1,6 +1,6 @@
 Players choose their markers
 
-There is a grid, 6x6
+There is a grid, 3x3
 Each cell in the grid needs to be represented in gameBoard array
 
 Players in turn click the cells on the grid.
