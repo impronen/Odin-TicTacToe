@@ -17,3 +17,51 @@ Repeat until victory conditions are met by player or board is full.
 
 
 Further refinement: check if victory is still possible, if not => end game on stalemate.
+
+
+
+--- gameController ---
+
+gameController should include things that control the following:
+
+1. who's turn it is
+2. event listeners for the DOM side of gameBoard
+3. feeding moves to the gameBoard (what is being clicked on as index and playerMark)
+4. checks for victory condition - this might be possible / reasonable to divide 
+    (ie. doing the checks inside gameBoard and returning those to gameController to fire
+    a victory state for the game)
+
+
+--- gameBoard ---
+
+1. array for gameboard objects (ok)
+2. function to change values there (ok)
+3. function to check for victory conditions (build with object literal)
+
+-- Indexes for victory -- 
+
+0 [1,2 / 4,8 / 3,6]
+1 [0,2 / 4,7]
+2 [0,1 / 5,8]
+3 [0,6 / 4,5]
+4 [3,5 / 1,7 / 0,8]
+5 [2,8 / 3,4]
+6 [0,3 / 7,8]
+7 [1,4 / 6,8]
+8 [6,8 / 1,4]
+
+//counting from indexes for squares
+LEFT (0, 3 and 6) +1 and +2 (horizontal)
+RIGHT (2, 5 and 8) -1 and -2 (horizontal)
+CENTER (1, 4 and 7) -1 and +1 (horizontal)
+
+MIDDLE (3, 4 and 5) -3 and +3 (vertical)
+TOP (0, 1 and 2) +3 and +6 (vertical)
+BOTTOM (6, 7 and 8) -3 and -6 (horizontal)
+
+
+Perpendicular win
+If 0, 4 and 8 match
+or if 
+6, 4 and 2 match
+
