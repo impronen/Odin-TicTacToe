@@ -6,6 +6,14 @@ const gameBoard = {
      markChanger1: function(index, playerMark) {
         gameBoard['boardSquares'][index].mark = playerMark; //Mark in index changes
         console.log(gameBoard['boardSquares']);
+        let latestChanged = gameBoard['boardSquares'][index].ID
+        let latestIndex = index;
+        console.log(latestIndex)
+        return latestIndex, latestChanged;
+    },
+
+    victoryChecker: function() {
+
     },
 
     //Array for gameboard squares
@@ -47,9 +55,16 @@ const gameBoard = {
             "mark": "",  
         },
         
-    ]
+    ],
+
+
 }
 
+
+
+const gameController = {
+
+}
 
 
 const playerFactory = (name, playerMark) => {
