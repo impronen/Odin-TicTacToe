@@ -2,7 +2,7 @@
 //Gameboard
 const gameBoard = {
 
-    //Function to change values in boardSquares object array (not complete)
+    //Function to change values in boardSquares object array
      markChanger1: function(index, playerMark) {
         gameBoard['boardSquares'][index].mark = playerMark; //Mark in index changes
         console.log(gameBoard['boardSquares']);
@@ -12,7 +12,7 @@ const gameBoard = {
     boardSquares: [
         {
             "ID": "A1",
-            "mark": "",
+            "mark": "X",
         },
         {
             "ID": "B1",
@@ -61,7 +61,3 @@ let player2 = playerFactory("Dylan", "O");
 
 
 /* console.log(gameBoard['boardSquares'][1]); -- to access gameboard squares */
-
-
-/* const markChanger = (() => {
-    const change = (index, playerMark) => /* function that matches the index on gameBoard and places playerMark as mark*/
