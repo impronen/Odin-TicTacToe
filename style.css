@@ -1,0 +1,22 @@
+
+.main {
+display: flex;
+justify-content: center;
+    
+}
+
+.game-board {
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+    height: 500px;
+    flex-wrap: wrap;
+}
+
+.gameGrid{
+    display: flex;
+    margin: 7px;
+    background-color: darkolivegreen;
+    height: 30%;
+    width: 30%;
+}
