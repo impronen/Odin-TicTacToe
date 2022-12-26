@@ -36,7 +36,6 @@ gameController should include things that control the following:
 
 1. array for gameboard objects (ok)
 2. function to change values there (ok)
-3. function to check for victory conditions (build with object literal)
 
 -- Indexes for victory -- 
 
