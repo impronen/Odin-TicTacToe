@@ -4,7 +4,7 @@ const gameBoard = {
 
     //Function to change values in boardSquares object array
      markChanger1: function(index, playerMark) {
-        gameBoard['boardSquares'][index].mark = playerMark; //Mark in index changes
+        gameBoard['boardSquares'][index].mark = playerMark;
         console.log(gameBoard['boardSquares']);
         let latestChanged = gameBoard['boardSquares'][index].ID
         let latestIndex = index;
@@ -12,9 +12,16 @@ const gameBoard = {
         return latestIndex, latestChanged;
     },
 
-    victoryChecker: function() {
 
-    },
+/*  0 [1,2 / 4,8 / 3,6]
+    1 [0,2 / 4,7]
+    2 [0,1 / 5,8]
+    3 [0,6 / 4,5]
+    4 [3,5 / 1,7 / 0,8]
+    5 [2,8 / 3,4]
+    6 [0,3 / 7,8]
+    7 [1,4 / 6,8]
+    8 [6,8 / 1,4] */
 
     //Array for gameboard squares
     boardSquares: [
@@ -64,7 +71,32 @@ const gameBoard = {
 
 const gameController = {
 
-}
+
+    victoryChecker: function(currentPlayerMark, markedSquare) {
+
+/*         currentPlayerMark = 'O';
+        markedSquare = 1; */
+        let win = false;
+
+                if(gameBoard['boardSquares'][1].mark === currentPlayerMark && gameBoard['boardSquares'][2].mark === currentPlayerMark){
+                    win = true;
+                    console.log("WIN")
+                    return win
+                } else if (gameBoard['boardSquares'][4].mark === currentPlayerMark && gameBoard['boardSquares'][8].mark === currentPlayerMark){
+                    win = true;
+                    console.log("WIN")
+                    return win
+                } else if (gameBoard['boardSquares'][3].mark === currentPlayerMark && gameBoard['boardSquares'][6].mark === currentPlayerMark) {
+                    console.log("WIN")
+                    return win
+                }
+            },
+            '1':function(){
+                if(gameBoard['boardSquares'][1].mark === currentPlayerMark && gameBoard['boardSquares'][2].mark === currentPlayerMark){
+                    win = true;
+                }
+            }
+        }
 
 
 const playerFactory = (name, playerMark) => {
