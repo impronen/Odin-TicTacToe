@@ -64,3 +64,6 @@ If 0, 4 and 8 match
 or if 
 6, 4 and 2 match
 
+
+
+gameBoard.markChanger1(1, player2.playerMark);
