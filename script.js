@@ -52,11 +52,11 @@ const gameBoard = {
         },
         
     ],
-
+    //Dynamic board rendering with ID's corresponding to boardSquares
     boardRenderer: function() {
         let gameBoardDiv = document.querySelector(".game-board")
         for (const property in gameBoard['boardSquares']) {
-            console.log(`boardSquares.${property}`);
+            console.log(`Creating square ${property}`);
             let square = document.createElement("div")
             square.className = "gameGrid"
             square.setAttribute('id',`${property}`)
@@ -66,10 +66,25 @@ const gameBoard = {
 
 }
 
-
+gameBoard.boardRenderer();
 
 const gameController = {
 
+    //Function to for player to take their turn
+    playTurn: function() {
+        let currenPlayer = player1;
+        let selectedCell = document.querySelectorAll(".gameGrid")
+
+        selectedCell.forEach((item) => {
+            item.addEventListener('click', (e) => {
+                console.log(e.srcElement.id)
+                let chosenIndex = e.srcElement.id
+                console.log("WHEE")
+                gameBoard.markChanger1(chosenIndex, currenPlayer.playerMark)
+            })
+        })
+
+    },
 
     //Function to check victory conditions
     victoryChecker: function(currentPlayerMark, markedSquare) {
