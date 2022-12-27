@@ -22,6 +22,7 @@ const gameBoard = {
         return latestIndex, latestChanged;
     },
 
+
     //Array for gameboard squares
     boardSquares: [
         {
@@ -91,12 +92,18 @@ const gameController = {
                 console.log(e.srcElement.id)
                 let chosenIndex = e.srcElement.id
                 console.log("WHEE")
-                gameBoard.markChanger1(chosenIndex, currenPlayer.playerMark)
-                gameController.switchCurrentPlayer(currenPlayer);
+                gameBoard.markChanger1(chosenIndex, currenPlayer.playerMark) //Update object arrau
+                gameController.domSquareUpdater(chosenIndex, currenPlayer.playerMark) //Update DOM
+                gameController.switchCurrentPlayer(currenPlayer); //Switch to other player 
             })
         })
         
         
+    },
+    //Function to place players mark to the DOM element
+    domSquareUpdater: function(index, playerMark){
+        console.log(playerMark)
+        document.getElementById(index).innerHTML = playerMark
     },
 
     switchCurrentPlayer: function() {
