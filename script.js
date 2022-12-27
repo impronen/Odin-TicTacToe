@@ -1,3 +1,13 @@
+//Factory to assing values for players
+const playerFactory = (name, playerMark) => {
+    return { name, playerMark}
+}
+
+let player1 = playerFactory("Bob", "X");
+let player2 = playerFactory("Dylan", "O");
+
+let currenPlayer = player1;
+
 
 //Gameboard
 const gameBoard = {
@@ -56,7 +66,7 @@ const gameBoard = {
     boardRenderer: function() {
         let gameBoardDiv = document.querySelector(".game-board")
         for (const property in gameBoard['boardSquares']) {
-            console.log(`Creating square ${property}`);
+            /* console.log(`Creating square ${property}`); */
             let square = document.createElement("div")
             square.className = "gameGrid"
             square.setAttribute('id',`${property}`)
@@ -72,7 +82,8 @@ const gameController = {
 
     //Function to for player to take their turn
     playTurn: function() {
-        let currenPlayer = player1;
+        console.log(currenPlayer)
+        
         let selectedCell = document.querySelectorAll(".gameGrid")
 
         selectedCell.forEach((item) => {
@@ -81,9 +92,19 @@ const gameController = {
                 let chosenIndex = e.srcElement.id
                 console.log("WHEE")
                 gameBoard.markChanger1(chosenIndex, currenPlayer.playerMark)
+                gameController.switchCurrentPlayer(currenPlayer);
             })
         })
+        
+        
+    },
 
+    switchCurrentPlayer: function() {
+        console.log(currenPlayer)
+        if (currenPlayer.playerMark === "X") {currenPlayer = player2}
+        else if (currenPlayer.playerMark === "O") {currenPlayer = player1}
+        console.log(currenPlayer)
+        return currenPlayer
     },
 
     //Function to check victory conditions
@@ -192,20 +213,11 @@ const gameController = {
             }
         }, //victoryChecker ends here
 
-    switchCurrentPlayer: function() {
-        if (currenPlayer = player1) {currenPlayer = player2}
-        else {currenPlayer = player1}
-    }
+
 
 }
 
-//Factory to assing values for players
-const playerFactory = (name, playerMark) => {
-    return { name, playerMark}
-}
 
-let player1 = playerFactory("Bob", "X");
-let player2 = playerFactory("Dylan", "O");
 
 
 /* console.log(gameBoard['boardSquares'][1]); -- to access gameboard squares */
