@@ -53,6 +53,16 @@ const gameBoard = {
         
     ],
 
+    boardRenderer: function() {
+        let gameBoardDiv = document.querySelector(".game-board")
+        for (const property in gameBoard['boardSquares']) {
+            console.log(`boardSquares.${property}`);
+            let square = document.createElement("div")
+            square.className = "gameGrid"
+            square.setAttribute('id',`${property}`)
+            gameBoardDiv.appendChild(square)
+        }
+    },
 
 }
 
