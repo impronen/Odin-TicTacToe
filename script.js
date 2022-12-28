@@ -20,7 +20,6 @@ const gameBoard = {
         console.log(gameBoard['boardSquares']);
         let latestChanged = gameBoard['boardSquares'][index].ID
         let latestIndex = index;
-        console.log(latestIndex)
         return latestIndex, latestChanged;
     },
 
@@ -69,7 +68,6 @@ const gameBoard = {
     boardRenderer: function() {
         let gameBoardDiv = document.querySelector(".game-board")
         for (const property in gameBoard['boardSquares']) {
-            /* console.log(`Creating square ${property}`); */
             let square = document.createElement("div")
             square.className = "gameGrid"
             square.setAttribute('id',`${property}`)
@@ -94,13 +92,11 @@ const gameController = {
 
     //Function to for player to take their turn
     playTurn: function() {
-        console.log(currenPlayer)
         
         let selectedCell = document.querySelectorAll(".gameGrid")
 
         selectedCell.forEach((item) => {
             item.addEventListener('click', (e) => {
-                console.log(e.srcElement.id)
                 let chosenIndex = e.srcElement.id
                 gameBoard.markChanger1(chosenIndex, currenPlayer.playerMark) //Update object arrau
                 gameController.domSquareUpdater(chosenIndex, currenPlayer.playerMark) //Update DOM
@@ -114,7 +110,6 @@ const gameController = {
     },
     //Function to place players mark to the DOM element
     domSquareUpdater: function(index, playerMark){
-        console.log(playerMark)
         document.getElementById(index).innerHTML = playerMark
     },
 
@@ -137,7 +132,6 @@ const gameController = {
         let win = false;
         let x = currentPlayerMark;
         let y = Number(markedSquare)
-        console.log(typeof(y))
         console.log(`Mark is ${x} and square is ${markedSquare}`)
 
         switch(y){
@@ -145,7 +139,6 @@ const gameController = {
                 if(gameBoard['boardSquares'][1].mark === x && gameBoard['boardSquares'][2].mark === x){
                     win = true
                     console.log("WIN 0")
-                    console.log(win)
                     return win
                 } else if (gameBoard['boardSquares'][4].mark === x && gameBoard['boardSquares'][8].mark === x){
                     win = true
