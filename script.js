@@ -77,6 +77,15 @@ const gameBoard = {
         }
     },
 
+    currentPlayerRender: function() {
+        let mainDIv = document.querySelector(".main")
+        let currentPlayerDisplayer = document.createElement("div")
+        let oldChild = document.querySelector(".current-player")
+        currentPlayerDisplayer.className = "current-player"
+        currentPlayerDisplayer.innerHTML = `It's ${currenPlayer.name}'s turn`
+        mainDIv.replaceChild(currentPlayerDisplayer, oldChild)
+    },
+
 }
 
 gameBoard.boardRenderer();
@@ -96,7 +105,8 @@ const gameController = {
                 console.log("WHEE")
                 gameBoard.markChanger1(chosenIndex, currenPlayer.playerMark) //Update object arrau
                 gameController.domSquareUpdater(chosenIndex, currenPlayer.playerMark) //Update DOM
-                gameController.switchCurrentPlayer(currenPlayer); //Switch to other player 
+                gameController.switchCurrentPlayer(currenPlayer) //Switch to other player
+                gameBoard.currentPlayerRender(currenPlayer)
             })
         })
         
@@ -236,8 +246,9 @@ const gameController = {
 
 
 startButton.addEventListener('click', () => {
-gameController.playTurn();
-gameController.nameUpdater();
+gameController.playTurn()
+gameController.nameUpdater()
+gameBoard.currentPlayerRender(currenPlayer)
 });
 
 /* console.log(gameBoard['boardSquares'][1]); -- to access gameboard squares */
