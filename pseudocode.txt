@@ -36,6 +36,12 @@ gameController should include things that control the following:
 
 1. array for gameboard objects (ok)
 2. function to change values there (ok)
+3. function to update the DOM (placed inside markChanger1)
+
+
+domSquareUpdater plan:
+
+
 
 -- Indexes for victory -- 
 
