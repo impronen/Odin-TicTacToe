@@ -1,44 +1,91 @@
-
-.main {
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
     
+  }
+
+fieldset {
+    border: 0;
 }
 
+input {
+    border: 0;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 3px;
+}
+
+input:focus {
+    outline: none;
+    background-color: #F6AB04;
+  }
+
+button {
+    border: 0;
+    padding: 12px;
+    border-radius: 5px;
+    width: 125px;
+    background-color: #762801;
+    color: #F6AB04;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 1px, rgba(0, 0, 0, 0.24) 0px 2px 2px;
+}
+
+button:active {
+    transform: translateY(2px);
+  }
+
 .heading {
+    background-color: #E46C00;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    height: 15vh;
 }
 
 .player-selector {
-
+    border-style: none;
 }
 
 .game-start {
     margin-right: 20px;
 }
 
+.main {
+    background-color: #F6AB04;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 75vh;
+    color: #762801;
+}
+
 .game-board {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     width: 500px;
     height: 500px;
-    flex-wrap: wrap;
+    margin: 30px;
+    color: #762801;
 }
 
 .gameGrid{
     display: flex;
     border-radius: 10px;
     margin: 7px;
-    background-color: darkolivegreen;
+    background-color: #626634;
     height: 30%;
     width: 30%;
     justify-content: center;
     align-items: center;
-    color: blanchedalmond;
     font-size: 50px;
+}
+
+
+.footer {
+    height: 10vh;
+    background-color: #9C924D;
 }
