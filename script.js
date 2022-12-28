@@ -8,6 +8,8 @@ let player2 = playerFactory("Dylan", "O");
 
 let currenPlayer = player1;
 
+let startButton = document.getElementById("start-game")
+
 
 //Gameboard
 const gameBoard = {
@@ -112,6 +114,14 @@ const gameController = {
         else if (currenPlayer.playerMark === "O") {currenPlayer = player1}
         console.log(currenPlayer)
         return currenPlayer
+    },
+
+    //Changes the names of the players to ones in input boxes
+    nameUpdater: function() {
+        let player1Name = document.getElementById("player1_name").value
+        let player2Name = document.getElementById("player2_name").value
+        player1.name = player1Name
+        player2.name = player2Name
     },
 
     //Function to check victory conditions
@@ -225,6 +235,9 @@ const gameController = {
 }
 
 
-
+startButton.addEventListener('click', () => {
+gameController.playTurn();
+gameController.nameUpdater();
+});
 
 /* console.log(gameBoard['boardSquares'][1]); -- to access gameboard squares */
