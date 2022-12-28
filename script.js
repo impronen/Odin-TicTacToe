@@ -102,9 +102,9 @@ const gameController = {
             item.addEventListener('click', (e) => {
                 console.log(e.srcElement.id)
                 let chosenIndex = e.srcElement.id
-                console.log("WHEE")
                 gameBoard.markChanger1(chosenIndex, currenPlayer.playerMark) //Update object arrau
                 gameController.domSquareUpdater(chosenIndex, currenPlayer.playerMark) //Update DOM
+                gameController.victoryChecker(currenPlayer.playerMark, chosenIndex)
                 gameController.switchCurrentPlayer(currenPlayer) //Switch to other player
                 gameBoard.currentPlayerRender(currenPlayer)
             })
@@ -119,10 +119,8 @@ const gameController = {
     },
 
     switchCurrentPlayer: function() {
-        console.log(currenPlayer)
         if (currenPlayer.playerMark === "X") {currenPlayer = player2}
         else if (currenPlayer.playerMark === "O") {currenPlayer = player1}
-        console.log(currenPlayer)
         return currenPlayer
     },
 
@@ -137,106 +135,120 @@ const gameController = {
     //Function to check victory conditions
     victoryChecker: function(currentPlayerMark, markedSquare) {
         let win = false;
+        let x = currentPlayerMark;
+        let y = Number(markedSquare)
+        console.log(typeof(y))
+        console.log(`Mark is ${x} and square is ${markedSquare}`)
 
-        switch(markedSquare){
+        switch(y){
             case 0:
-                if(gameBoard['boardSquares'][1].mark === currentPlayerMark && gameBoard['boardSquares'][2].mark === currentPlayerMark){
-                    win = true;
+                if(gameBoard['boardSquares'][1].mark === x && gameBoard['boardSquares'][2].mark === x){
+                    win = true
+                    console.log("WIN 0")
+                    console.log(win)
+                    return win
+                } else if (gameBoard['boardSquares'][4].mark === x && gameBoard['boardSquares'][8].mark === x){
+                    win = true
                     console.log("WIN 0")
                     return win
-                } else if (gameBoard['boardSquares'][4].mark === currentPlayerMark && gameBoard['boardSquares'][8].mark === currentPlayerMark){
-                    win = true;
+                } else if (gameBoard['boardSquares'][3].mark === x && gameBoard['boardSquares'][6].mark === x) {
+                    win = true
                     console.log("WIN 0")
-                    return win
-                } else if (gameBoard['boardSquares'][3].mark === currentPlayerMark && gameBoard['boardSquares'][6].mark === currentPlayerMark) {
-                    win = true;
-                    console.log("WIN 0")
-                    return win
+                    return win 
                 }
+                break;
             case 1:
-                if(gameBoard['boardSquares'][0].mark === currentPlayerMark && gameBoard['boardSquares'][2].mark === currentPlayerMark){
-                    win = true;
+                if(gameBoard['boardSquares'][0].mark === x && gameBoard['boardSquares'][2].mark === x){
+                    win = true
                     console.log("WIN 1")
                     return win
-                } else if (gameBoard['boardSquares'][4].mark === currentPlayerMark && gameBoard['boardSquares'][7].mark === currentPlayerMark){
-                    win = true;
+                } else if (gameBoard['boardSquares'][4].mark === x && gameBoard['boardSquares'][7].mark === x){
+                    win = true
                     console.log("WIN 1")
                     return win
                 }
+                break;
             case 2:
-                if(gameBoard['boardSquares'][0].mark === currentPlayerMark && gameBoard['boardSquares'][1].mark === currentPlayerMark){
-                    win = true;
+                if(gameBoard['boardSquares'][0].mark === x && gameBoard['boardSquares'][1].mark === x){
+                    win = true
                     console.log("WIN 2")
                     return win
-                } else if (gameBoard['boardSquares'][5].mark === currentPlayerMark && gameBoard['boardSquares'][8].mark === currentPlayerMark){
-                    win = true;
+                } else if (gameBoard['boardSquares'][5].mark === x && gameBoard['boardSquares'][8].mark === x){
+                    win = true
                     console.log("WIN 2")
                     return win
                 }
+                break;
             case 3:
-                if(gameBoard['boardSquares'][0].mark === currentPlayerMark && gameBoard['boardSquares'][6].mark === currentPlayerMark){
-                    win = true;
+                if(gameBoard['boardSquares'][0].mark === x && gameBoard['boardSquares'][6].mark === x){
+                    win = true
                     console.log("WIN 3")
                     return win
-                } else if (gameBoard['boardSquares'][4].mark === currentPlayerMark && gameBoard['boardSquares'][5].mark === currentPlayerMark){
-                    win = true;
+                } else if (gameBoard['boardSquares'][4].mark === x && gameBoard['boardSquares'][5].mark === x){
+                    win = true
                     console.log("WIN 3")
                     return win
-            }
+                }
+                break;
             case 4:
-                if(gameBoard['boardSquares'][3].mark === currentPlayerMark && gameBoard['boardSquares'][5].mark === currentPlayerMark){
-                    win = true;
+                if(gameBoard['boardSquares'][3].mark === x && gameBoard['boardSquares'][5].mark === x){
+                    win = true
                     console.log("WIN 4")
                     return win
-                } else if (gameBoard['boardSquares'][1].mark === currentPlayerMark && gameBoard['boardSquares'][7].mark === currentPlayerMark){
-                    win = true;
+                } else if (gameBoard['boardSquares'][1].mark === x && gameBoard['boardSquares'][7].mark === x){
+                    win = true
                     console.log("WIN 4")
                     return win
-                } else if (gameBoard['boardSquares'][0].mark === currentPlayerMark && gameBoard['boardSquares'][8].mark === currentPlayerMark) {
-                    win = true;
+                } else if (gameBoard['boardSquares'][0].mark === x && gameBoard['boardSquares'][8].mark === x) {
+                    win = true
                     console.log("WIN 4")
                     return win
                 }
+                break;
             case 5:
-                if(gameBoard['boardSquares'][2].mark === currentPlayerMark && gameBoard['boardSquares'][8].mark === currentPlayerMark){
-                    win = true;
+                if(gameBoard['boardSquares'][2].mark === x && gameBoard['boardSquares'][8].mark === x){
+                    win = true
                     console.log("WIN 5")
                     return win
-                } else if (gameBoard['boardSquares'][3].mark === currentPlayerMark && gameBoard['boardSquares'][4].mark === currentPlayerMark){
-                    win = true;
+                } else if (gameBoard['boardSquares'][3].mark === x && gameBoard['boardSquares'][4].mark === x){
+                    win = true
                     console.log("WIN 5")
                     return win
                 }
+                break;
             case 6:
-                if(gameBoard['boardSquares'][0].mark === currentPlayerMark && gameBoard['boardSquares'][3].mark === currentPlayerMark){
-                    win = true;
+                if(gameBoard['boardSquares'][0].mark === x && gameBoard['boardSquares'][3].mark === x){
+                    win = true
                     console.log("WIN 6")
                     return win
-                } else if (gameBoard['boardSquares'][7].mark === currentPlayerMark && gameBoard['boardSquares'][8].mark === currentPlayerMark){
-                    win = true;
+                } else if (gameBoard['boardSquares'][7].mark === x && gameBoard['boardSquares'][8].mark === x){
+                    win = true
                     console.log("WIN 6")
                     return win
                 }
+                break;
             case 7:
-                if(gameBoard['boardSquares'][1].mark === currentPlayerMark && gameBoard['boardSquares'][4].mark === currentPlayerMark){
-                    win = true;
+                if(gameBoard['boardSquares'][1].mark === x && gameBoard['boardSquares'][4].mark === x){
+                    win = true
                     console.log("WIN 7")
                     return win
-                } else if (gameBoard['boardSquares'][6].mark === currentPlayerMark && gameBoard['boardSquares'][8].mark === currentPlayerMark){
-                    win = true;
+                } else if (gameBoard['boardSquares'][6].mark === x && gameBoard['boardSquares'][8].mark === x){
+                    win = true
                     console.log("WIN 7")
                     return win
                 }
+                break;
             case 8:
-                if(gameBoard['boardSquares'][6].mark === currentPlayerMark && gameBoard['boardSquares'][8].mark === currentPlayerMark){
-                    win = true;
+                if(gameBoard['boardSquares'][6].mark === x && gameBoard['boardSquares'][8].mark === x){
+                    win = true
                     console.log("WIN 8")
                     return win
-                } else if (gameBoard['boardSquares'][0].mark === currentPlayerMark && gameBoard['boardSquares'][4].mark === currentPlayerMark){
-                    win = true;
+                } else if (gameBoard['boardSquares'][0].mark === x && gameBoard['boardSquares'][4].mark === x){
+                    win = true
                     console.log("WIN 8")
                     return win
                 }
+                break;
             }
         }, //victoryChecker ends here
 
