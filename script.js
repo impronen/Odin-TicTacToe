@@ -147,13 +147,7 @@ const gameController = {
         console.log(`Mark is ${x} and square is ${markedSquare}`)
         let z = 0
         let u = currenPlayer
-        for (const element of gameBoard['boardSquares']) {
-            
-            if (element.mark === "X" || element.mark === "O"){
-                z++
-            }
 
-            }
 
 console.log(z)
 
@@ -314,8 +308,14 @@ console.log(z)
                 }
                 break;
             }
-
+            //Looper to check for a tie
+            for (const element of gameBoard['boardSquares']) {
             
+                if (element.mark === "X" || element.mark === "O"){
+                    z++
+                }
+                if (z === 9 && winner === "") {console.log("Its a draw")}
+                }
 
         }, //victoryChecker ends here
 
