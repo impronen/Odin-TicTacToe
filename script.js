@@ -18,7 +18,6 @@ const gameBoard = {
     //Function to change values in boardSquares object array
      markChanger1: function(index, playerMark) {
         gameBoard['boardSquares'][index].mark = playerMark;
-        /* console.log(gameBoard['boardSquares']); */
         let latestChanged = gameBoard['boardSquares'][index].ID
         let latestIndex = index;
         return latestIndex, latestChanged;
@@ -76,6 +75,7 @@ const gameBoard = {
         }
     },
 
+    //Shows who's turn it is at the bottom
     currentPlayerRender: function() {
         let mainDIv = document.querySelector(".main")
         let currentPlayerDisplayer = document.createElement("div")
@@ -83,6 +83,10 @@ const gameBoard = {
         currentPlayerDisplayer.className = "current-player"
         currentPlayerDisplayer.innerHTML = `It's ${currenPlayer.name}'s turn`
         mainDIv.replaceChild(currentPlayerDisplayer, oldChild)
+    },
+
+    victoryOverlayRenderer: function() {
+
     },
 
 }
@@ -95,20 +99,12 @@ const gameController = {
     //Function to for player to take their turn
     playTurn: function() {
 
-    
-        
         let selectedCell = document.querySelectorAll(".gameGrid")
 
         selectedCell.forEach((item) => {
             item.addEventListener('click', (e) => {
-                if (win === true) {
-                    console.log("The game is already won?!")
-                    return
-                }
-                if (win === "TIE") {
-                    console.log("The grid is full")
-                    return
-                }
+                if (win === true) {return}
+                if (win === "TIE") {return}
                 let chosenIndex = e.srcElement.id
                 gameBoard.markChanger1(chosenIndex, currenPlayer.playerMark) //Update object arrau
                 gameController.domSquareUpdater(chosenIndex, currenPlayer.playerMark) //Update DOM
@@ -139,120 +135,122 @@ const gameController = {
         player2.name = player2Name
     },
 
+    // Looper function to check for a tie condition (placed inside victoryChecker)
+    tieChecker: function() {
+        let z = 0
+        for (const element of gameBoard['boardSquares']) {
+            
+            if (element.mark === "X" || element.mark === "O"){
+                z++
+            }
+            if (z === 9 && winner === "") {
+                winner = "TIE"
+                gameController.endGame(winner)
+            }
+        }
+        console.log(z)
+    },
+
+    endGame: function (winner) {
+        console.log(`This is the endgame function firing and the winner is ${winner.name}`)
+    },
+
     //Function to check victory conditions
     victoryChecker: function(currentPlayerMark, markedSquare, currenPlayer) {
         
         let x = currentPlayerMark;
         let y = Number(markedSquare)
         console.log(`Mark is ${x} and square is ${markedSquare}`)
-        let z = 0
         let u = currenPlayer
-
-
-console.log(z)
 
         switch(y){
             
             case 0:
                 if(gameBoard['boardSquares'][1].mark === x && gameBoard['boardSquares'][2].mark === x){
                     win = true
-                    console.log("WIN 0")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 } else if (gameBoard['boardSquares'][4].mark === x && gameBoard['boardSquares'][8].mark === x){
                     win = true
-                    console.log("WIN 0")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 } else if (gameBoard['boardSquares'][3].mark === x && gameBoard['boardSquares'][6].mark === x) {
                     win = true
-                    console.log("WIN 0")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 }
                 break;
             case 1:
                 if(gameBoard['boardSquares'][0].mark === x && gameBoard['boardSquares'][2].mark === x){
                     win = true
-                    console.log("WIN 1")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 } else if (gameBoard['boardSquares'][4].mark === x && gameBoard['boardSquares'][7].mark === x){
                     win = true
-                    console.log("WIN 1")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 }
                 break;
             case 2:
                 if(gameBoard['boardSquares'][0].mark === x && gameBoard['boardSquares'][1].mark === x){
                     win = true
-                    console.log("WIN 2")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 } else if (gameBoard['boardSquares'][5].mark === x && gameBoard['boardSquares'][8].mark === x){
                     win = true
-                    console.log("WIN 2")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 }
                 break;
             case 3:
                 if(gameBoard['boardSquares'][0].mark === x && gameBoard['boardSquares'][6].mark === x){
                     win = true
-                    console.log("WIN 3")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 } else if (gameBoard['boardSquares'][4].mark === x && gameBoard['boardSquares'][5].mark === x){
                     win = true
-                    console.log("WIN 3")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 }
                 break;
             case 4:
                 if(gameBoard['boardSquares'][3].mark === x && gameBoard['boardSquares'][5].mark === x){
                     win = true
-                    console.log("WIN 4")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 } else if (gameBoard['boardSquares'][1].mark === x && gameBoard['boardSquares'][7].mark === x){
                     win = true
-                    console.log("WIN 4")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 } else if (gameBoard['boardSquares'][0].mark === x && gameBoard['boardSquares'][8].mark === x) {
                     win = true
-                    console.log("WIN 4")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 }
                 break;
             case 5:
                 if(gameBoard['boardSquares'][2].mark === x && gameBoard['boardSquares'][8].mark === x){
                     win = true
-                    console.log("WIN 5")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 } else if (gameBoard['boardSquares'][3].mark === x && gameBoard['boardSquares'][4].mark === x){
                     win = true
-                    console.log("WIN 5")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 }
                 break;
             case 6:
@@ -260,67 +258,50 @@ console.log(z)
                     win = true
                     console.log("WIN 6")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 } else if (gameBoard['boardSquares'][7].mark === x && gameBoard['boardSquares'][8].mark === x){
                     win = true
-                    console.log("WIN 6")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 } else if (gameBoard['boardSquares'][4].mark === x && gameBoard['boardSquares'][2].mark === x){
                     win = true
-                    console.log("WIN 6")
                     console.log(win)
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 }
                 break;
             case 7:
                 if(gameBoard['boardSquares'][1].mark === x && gameBoard['boardSquares'][4].mark === x){
                     win = true
-                    console.log("WIN 7")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 } else if (gameBoard['boardSquares'][6].mark === x && gameBoard['boardSquares'][8].mark === x){
                     win = true
-                    console.log("WIN 7")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 }
                 break;
             case 8:
                 if(gameBoard['boardSquares'][6].mark === x && gameBoard['boardSquares'][8].mark === x){
                     win = true
-                    console.log("WIN 8")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 } else if (gameBoard['boardSquares'][0].mark === x && gameBoard['boardSquares'][4].mark === x){
                     win = true
-                    console.log("WIN 8")
                     winner = u
-                    console.log(winner)
-                    return win, winner
+                    gameController.endGame(winner)
+                    return
                 }
                 break;
             }
-            //Looper to check for a tie
-            for (const element of gameBoard['boardSquares']) {
-            
-                if (element.mark === "X" || element.mark === "O"){
-                    z++
-                }
-                if (z === 9 && winner === "") {console.log("Its a draw")}
-                }
-
+            gameController.tieChecker()
         }, //victoryChecker ends here
-
-
-
 }
 
 
