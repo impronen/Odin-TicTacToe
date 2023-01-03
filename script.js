@@ -85,8 +85,12 @@ const gameBoard = {
         mainDIv.replaceChild(currentPlayerDisplayer, oldChild)
     },
 
-    victoryOverlayRenderer: function() {
-
+    victoryOverlayRenderer: function(winner) {
+        let mainDIv = document.querySelector(".main")
+        let endGameDisplayer = document.createElement("div")
+        endGameDisplayer.className = "endgame"
+        mainDIv.appendChild(endGameDisplayer)
+        endGameDisplayer.innerHTML = `This is the victoryOverlayRenderer function firing and the winner is ${winner.name}`
     },
 
 }
@@ -152,6 +156,7 @@ const gameController = {
     },
 
     endGame: function (winner) {
+        gameBoard.victoryOverlayRenderer(winner)
         console.log(`This is the endgame function firing and the winner is ${winner.name}`)
     },
 
