@@ -75,6 +75,28 @@ const gameBoard = {
         }
     },
 
+    //Cleans the array of marks
+    dataCleaner: function () {
+        gameBoard.boardSquares.forEach((squareObject) => {
+           squareObject.mark = ""
+        })
+        winner = ""
+        win = false
+        currenPlayer = player1
+    },
+
+    //Cleans the gameboard
+    screenCleaner: function () {
+        let allSquares = document.querySelectorAll(".gameGrid")
+        allSquares.forEach((square) => {
+            square.innerHTML = ""
+        } )
+        let endOverlay = document.querySelector(".endgame")
+        endOverlay.remove()
+        let currentPlayerDisplayer = document.querySelector(".current-player")
+        currentPlayerDisplayer.innerHTML = ""
+    },
+
     //Shows who's turn it is at the bottom
     currentPlayerRender: function() {
         let mainDIv = document.querySelector(".main")
@@ -85,12 +107,21 @@ const gameBoard = {
         mainDIv.replaceChild(currentPlayerDisplayer, oldChild)
     },
 
+    //Renders an overlay with a message for winner + reset button
     victoryOverlayRenderer: function(winner) {
         let mainDIv = document.querySelector(".main")
         let endGameDisplayer = document.createElement("div")
         endGameDisplayer.className = "endgame"
         mainDIv.appendChild(endGameDisplayer)
-        endGameDisplayer.innerHTML = `This is the victoryOverlayRenderer function firing and the winner is ${winner.name}`
+        endGameDisplayer.innerHTML = `The winner is ${winner.name}`
+        let resetButton = document.createElement("button")
+        resetButton.className = "resetButton"
+        resetButton.innerHTML = "Reset game"
+        endGameDisplayer.appendChild(resetButton)
+        resetButton.addEventListener('click', () => {
+            gameBoard.dataCleaner()
+            gameBoard.screenCleaner()
+        })
     },
 
 }
@@ -109,6 +140,7 @@ const gameController = {
             item.addEventListener('click', (e) => {
                 if (win === true) {return}
                 if (win === "TIE") {return}
+                if (item.innerHTML == "X" || item.innerHTML == "O" ) {return}
                 let chosenIndex = e.srcElement.id
                 gameBoard.markChanger1(chosenIndex, currenPlayer.playerMark) //Update object arrau
                 gameController.domSquareUpdater(chosenIndex, currenPlayer.playerMark) //Update DOM
@@ -131,12 +163,15 @@ const gameController = {
         return currenPlayer
     },
 
-    //Changes the names of the players to ones in input boxes
+    //Changes the names of the players to ones in input boxes & resets
     nameUpdater: function() {
         let player1Name = document.getElementById("player1_name").value
         let player2Name = document.getElementById("player2_name").value
         player1.name = player1Name
         player2.name = player2Name
+
+        document.getElementById("player1_name").value = ""
+        document.getElementById("player2_name").value = ""
     },
 
     // Looper function to check for a tie condition (placed inside victoryChecker)
@@ -155,9 +190,9 @@ const gameController = {
         console.log(z)
     },
 
+
     endGame: function (winner) {
         gameBoard.victoryOverlayRenderer(winner)
-        console.log(`This is the endgame function firing and the winner is ${winner.name}`)
     },
 
     //Function to check victory conditions
@@ -317,3 +352,4 @@ gameBoard.currentPlayerRender(currenPlayer)
 });
 
 /* console.log(gameBoard['boardSquares'][1]); -- to access gameboard squares */
+
