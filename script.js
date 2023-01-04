@@ -9,6 +9,7 @@ let player2 = playerFactory("Dylan", "O");
 let currenPlayer = player1;
 let win = false
 let winner = ""
+let gameOn = false
 let startButton = document.getElementById("start-game")
 
 
@@ -82,6 +83,7 @@ const gameBoard = {
         })
         winner = ""
         win = false
+        gameOn = false
         currenPlayer = player1
     },
 
@@ -90,6 +92,7 @@ const gameBoard = {
         let allSquares = document.querySelectorAll(".gameGrid")
         allSquares.forEach((square) => {
             square.innerHTML = ""
+            
         } )
         let endOverlay = document.querySelector(".endgame")
         endOverlay.remove()
@@ -114,6 +117,7 @@ const gameBoard = {
         endGameDisplayer.className = "endgame"
         mainDIv.appendChild(endGameDisplayer)
         endGameDisplayer.innerHTML = `The winner is ${winner.name}`
+        
         let resetButton = document.createElement("button")
         resetButton.className = "resetButton"
         resetButton.innerHTML = "Reset game"
@@ -137,9 +141,9 @@ const gameController = {
         let selectedCell = document.querySelectorAll(".gameGrid")
 
         selectedCell.forEach((item) => {
-            item.addEventListener('click', (e) => {
-                if (win === true) {return}
-                if (win === "TIE") {return}
+            item.addEventListener('click', function cellManipulator(e) {
+                if (win === true || gameOn === false || win === "TIE") {return}
+                /* if (win === "TIE") {return} */
                 if (item.innerHTML == "X" || item.innerHTML == "O" ) {return}
                 let chosenIndex = e.srcElement.id
                 gameBoard.markChanger1(chosenIndex, currenPlayer.playerMark) //Update object arrau
@@ -346,6 +350,7 @@ const gameController = {
 
 
 startButton.addEventListener('click', () => {
+    gameOn = true
 gameController.playTurn()
 gameController.nameUpdater()
 gameBoard.currentPlayerRender(currenPlayer)
