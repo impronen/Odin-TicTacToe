@@ -96,6 +96,7 @@ button:active {
     padding: 15px;
     z-index: 7;
     position: absolute;
+    font-size: large;
 }
 
 .current-player {
@@ -107,10 +108,16 @@ button:active {
 }
 
 .resetButton {
-
+    margin-top: 35px;
 }
 
+
 .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 10vh;
     background-color: #9C924D;
+    color: #762801;
+    font-size: small;
 }
