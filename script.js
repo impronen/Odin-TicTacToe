@@ -331,7 +331,7 @@ const gameController = {
                 }
                 break;
             case 8:
-                if(gameBoard['boardSquares'][6].mark === x && gameBoard['boardSquares'][8].mark === x){
+                if(gameBoard['boardSquares'][6].mark === x && gameBoard['boardSquares'][7].mark === x){
                     win = true
                     winner = u
                     gameController.endGame(winner)
