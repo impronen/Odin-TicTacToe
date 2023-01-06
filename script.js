@@ -191,13 +191,23 @@ const gameController = {
                 gameController.endGame(winner)
             }
         }
-        console.log(z)
     },
 
 
     endGame: function (winner) {
         gameBoard.victoryOverlayRenderer(winner)
     },
+
+    winningCombinations: [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ],
 
     //Function to check victory conditions
     victoryChecker: function(currentPlayerMark, markedSquare, currenPlayer) {
@@ -206,6 +216,15 @@ const gameController = {
         let y = Number(markedSquare)
         console.log(`Mark is ${x} and square is ${markedSquare}`)
         let u = currenPlayer
+
+        gameController.winningCombinations.some(combination => {
+            combination.every(index => {
+                console.log(index)
+                if (gameBoard['boardSquares'][index].mark === x) {
+                    console.log(gameBoard['boardSquares'].mark)
+                }
+            })
+        })
 
         switch(y){
             
@@ -358,3 +377,23 @@ gameBoard.currentPlayerRender(currenPlayer)
 
 /* console.log(gameBoard['boardSquares'][1]); -- to access gameboard squares */
 
+
+
+/* 
+
+Hi all.
+
+I already completed my TTT but wasn’t satisfied with my messy victory checker, built with switch statements. So I stumbled upon a TTT tutorial, which uses methods .some and .every to iterate through possible combinations. You can find it here: https://www.codebrainer.com/blog/tic-tac-toe-javascript-game. This solution takes a pretty different approach, using classes but the principle should be applicable when using arrays of objects.
+
+function checkWin(currentClass) {
+	return WINNING_COMBINATIONS.some(combination => {
+		return combination.every(index => {
+			return cellElements[index].classList.contains(currentClass)
+		})
+	})
+}
+
+I have looked at the MDN articles on both methods but am having trouble in targeting the combinations with my gameboard objects. Here is my codepen: https://codepen.io/impronen/pen/eYjJpzd
+
+What I have now is starting from row 220. A function that first finds all the combinations with .every. In the tutorial, the row return cellElements[index].classList.contains(currentClass)  iterates over an array of DOM elements in an array cellElements. The .contains method is apparently a collect.js addition
+*/
