@@ -12,7 +12,6 @@ let winner = ""
 let gameOn = false
 let startButton = document.getElementById("start-game")
 
-
 //Gameboard
 const gameBoard = {
 
@@ -23,8 +22,6 @@ const gameBoard = {
         let latestIndex = index;
         return latestIndex, latestChanged;
     },
-
-
     //Array for gameboard squares
     boardSquares: [
         {
@@ -75,7 +72,6 @@ const gameBoard = {
             gameBoardDiv.appendChild(square)
         }
     },
-
     //Cleans the array of marks
     dataCleaner: function () {
         gameBoard.boardSquares.forEach((squareObject) => {
@@ -86,7 +82,6 @@ const gameBoard = {
         gameOn = false
         currenPlayer = player1
     },
-
     //Cleans the gameboard
     screenCleaner: function () {
         let allSquares = document.querySelectorAll(".gameGrid")
@@ -99,7 +94,6 @@ const gameBoard = {
         let currentPlayerDisplayer = document.querySelector(".current-player")
         currentPlayerDisplayer.innerHTML = ""
     },
-
     //Shows who's turn it is at the bottom
     currentPlayerRender: function() {
         let mainDIv = document.querySelector(".main")
@@ -109,7 +103,6 @@ const gameBoard = {
         currentPlayerDisplayer.innerHTML = `It's ${currenPlayer.name}'s turn`
         mainDIv.replaceChild(currentPlayerDisplayer, oldChild)
     },
-
     //Renders an overlay with a message for winner + reset button
     victoryOverlayRenderer: function(winner) {
         let mainDIv = document.querySelector(".main")
@@ -127,14 +120,10 @@ const gameBoard = {
             gameBoard.screenCleaner()
         })
     },
-
 }
-
 gameBoard.boardRenderer();
 
 const gameController = {
-
-
     //Function to for player to take their turn
     playTurn: function() {
 
@@ -160,13 +149,11 @@ const gameController = {
     domSquareUpdater: function(index, playerMark){
         document.getElementById(index).innerHTML = playerMark
     },
-
     switchCurrentPlayer: function() {
         if (currenPlayer.playerMark === "X") {currenPlayer = player2}
         else if (currenPlayer.playerMark === "O") {currenPlayer = player1}
         return currenPlayer
     },
-
     //Changes the names of the players to ones in input boxes & resets
     nameUpdater: function() {
         let player1Name = document.getElementById("player1_name").value
@@ -177,7 +164,6 @@ const gameController = {
         document.getElementById("player1_name").value = ""
         document.getElementById("player2_name").value = ""
     },
-
     // Looper function to check for a tie condition (placed inside victoryChecker)
     tieChecker: function() {
         let z = 0
@@ -192,11 +178,11 @@ const gameController = {
             }
         }
     },
-
+    //Function that passes the name of winner to gameboard victory renderer
     endGame: function (winner) {
         gameBoard.victoryOverlayRenderer(winner)
     },
-
+    //Hardcoded combinations
     winningCombinations: [
         [0, 1, 2], 
         [3, 4, 5], 
@@ -207,43 +193,22 @@ const gameController = {
         [1, 4, 7], 
         [2, 4, 6]
     ],
-
     //Function to check victory conditions
     victoryChecker: function(currentPlayerMark, markedSquare, currenPlayer) {
-        
-        let x = currentPlayerMark;
         let y = Number(markedSquare)
-        console.log(`Mark is ${x} and square is ${markedSquare}`)
-        let u = currenPlayer
-        
+        console.log(`Mark is ${currentPlayerMark} and square is ${markedSquare}`)
 
-        gameController.winningCombinations.some(combination => {
-            combination.every(index => {
-                console.log(index)
-                /* console.log(index, gameBoard.boardSquares[index]) */
-                let winCombo = gameController.winningCombinations[index]
-                console.log(winCombo)
-                let a = winCombo[0]
-                let b = winCombo[1]
-                let c = winCombo[2]
-/*                 console.log(a)
-                console.log("Next wincombo + marks from gameboard")
-                console.log(winCombo)
-                console.log(gameBoard['boardSquares'][a].mark )
-                console.log(gameBoard['boardSquares'][b].mark )
-                console.log(gameBoard['boardSquares'][c].mark )
-                console.log("end") */
-
-                if (gameBoard['boardSquares'][a].mark === currentPlayerMark
-                    && gameBoard['boardSquares'][b].mark === currentPlayerMark
-                    && gameBoard['boardSquares'][c].mark === currentPlayerMark) {
-                        win = true
-                        winner = u   
-                    }
-
-            })
+        let winningCombo = gameController.winningCombinations.find( combination => {
+            if (
+            combination.every( index =>
+              gameBoard.boardSquares[index].mark===currentPlayerMark,
+            )) 
+            {return win = true}
         })
-        if (win === true) {gameController.endGame(winner)}
+        if(win === true){
+            winner = currenPlayer
+            gameController.endGame(winner)
+        }
         gameController.tieChecker()
     },
 }
@@ -254,5 +219,3 @@ gameController.playTurn()
 gameController.nameUpdater()
 gameBoard.currentPlayerRender(currenPlayer)
 });
-
-/* console.log(gameBoard['boardSquares'][1]); -- to access gameboard squares */
